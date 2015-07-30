@@ -1,0 +1,14 @@
+PODS:
+  - TutorialKit (0.1.8)
+
+DEPENDENCIES:
+  - TutorialKit (from `../`)
+
+EXTERNAL SOURCES:
+  TutorialKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TutorialKit: c27b179429aa95fa486eef3fc626f8c371c46e92
+
+COCOAPODS: 0.36.4

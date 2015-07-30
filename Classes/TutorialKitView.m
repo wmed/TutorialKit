@@ -463,6 +463,18 @@ extern UIFont *gTutorialLabelFont;
 ////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
+    BOOL inside;
+    if (CGRectContainsPoint(self.highlightView.frame, point)) {
+        // Point lies inside the bounds.
+        NSLog(@"inside");
+        inside = YES;
+        
+    } else {
+        inside = NO;
+        NSLog(@"outside");
+    }
+    if (!inside) return nil;
+
     // pass through and dismiss!
     self.gestureView.hidden = YES;
     [TutorialKit dismissCurrentTutorialView];
