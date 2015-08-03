@@ -59,18 +59,6 @@ extern UIFont *gTutorialLabelFont;
 
 @implementation UIImage (FXBlurView)
 
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-    
-    CGRect bounds = [self.highlightView.layer convertRect:self.highlightView.layer.bounds toLayer:self.layer];
-    //        CGContextTranslateCTM(context, bounds.origin.x, bounds.origin.y);
-    //        CGContextSetBlendMode(context, kCGBlendModeClear);
-    //        [self.highlightView.layer renderInContext:context];
-    UIView *snapshot = [self.highlightView snapshotViewAfterScreenUpdates:NO];
-    snapshot.frame = bounds;
-    [self addSubview:snapshot];
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // FROM FXBlurView (modified)
 - (UIImage *)blurredImageWithRadius:(CGFloat)radius iterations:(NSUInteger)iterations tintColor:(UIColor *)tintColor
@@ -163,6 +151,18 @@ extern UIFont *gTutorialLabelFont;
 @end
 
 @implementation TutorialKitView
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CGRect bounds = [self.highlightView.layer convertRect:self.highlightView.layer.bounds toLayer:self.layer];
+    //        CGContextTranslateCTM(context, bounds.origin.x, bounds.origin.y);
+    //        CGContextSetBlendMode(context, kCGBlendModeClear);
+    //        [self.highlightView.layer renderInContext:context];
+    UIView *snapshot = [self.highlightView snapshotViewAfterScreenUpdates:NO];
+    snapshot.frame = bounds;
+    [self addSubview:snapshot];
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 + (instancetype) tutorialViewWithMessage:(NSString *)message
