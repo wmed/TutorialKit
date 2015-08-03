@@ -59,6 +59,18 @@ extern UIFont *gTutorialLabelFont;
 
 @implementation UIImage (FXBlurView)
 
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CGRect bounds = [self.highlightView.layer convertRect:self.highlightView.layer.bounds toLayer:self.layer];
+    //        CGContextTranslateCTM(context, bounds.origin.x, bounds.origin.y);
+    //        CGContextSetBlendMode(context, kCGBlendModeClear);
+    //        [self.highlightView.layer renderInContext:context];
+    UIView *snapshot = [self.highlightView snapshotViewAfterScreenUpdates:NO];
+    snapshot.frame = bounds;
+    [self addSubview:snapshot];
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // FROM FXBlurView (modified)
 - (UIImage *)blurredImageWithRadius:(CGFloat)radius iterations:(NSUInteger)iterations tintColor:(UIColor *)tintColor
@@ -406,11 +418,11 @@ extern UIFont *gTutorialLabelFont;
     if(self.highlightView) {
         CGContextSetRGBFillColor(context, 1.0f, 1.0f, 1.0f, 1.0f);
         CGContextFillRect(context, imageView.bounds);
-
-        CGRect bounds = [self.highlightView.layer convertRect:self.highlightView.layer.bounds toLayer:self.layer];
-        CGContextTranslateCTM(context, bounds.origin.x, bounds.origin.y);
-        CGContextSetBlendMode(context, kCGBlendModeClear);
-        [self.highlightView.layer renderInContext:context];
+//
+//        CGRect bounds = [self.highlightView.layer convertRect:self.highlightView.layer.bounds toLayer:self.layer];
+//        CGContextTranslateCTM(context, bounds.origin.x, bounds.origin.y);
+//        CGContextSetBlendMode(context, kCGBlendModeClear);
+//        [self.highlightView.layer renderInContext:context];
     }
     else {
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
